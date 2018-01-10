@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>今日头条</title>
+    <link rel="stylesheet" href="./js/BootStrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/loading.css">
+    <link rel="stylesheet" href="./css/main.css">
+    <script src="./js/AngularJS/angular.js"></script>
+    <script src="./js/Jquery/jquery-3.0.0.min.js"></script>
+    <script src="./js/BootStrap/js/bootstrap.min.js"></script>
+    <script src='./type.js'></script>
+    <script src='./httprequest.js'></script>
+    <script src='./content.js'></script>
+    <script src='./app.js'></script>
+    <script src="./layer/layer.js"></script>
+    <script>
+    	$('#text4').on('click', function(){
+    	var ii = layer.load();
+    	setTimeout(function(){
+      		layer.close(ii);
+    	}, 1000);
+ 	 }); //0代表加载的风格，支持0-2
+    </script>
+    <style>
+    a.list-group-item{
+    	margin:7px;
+    }
+    	a.list-group-item:hover{
+    		transition: all .2s ease;
+    		cursor: pointer;
+    		border: 2px solid #e1f5fe;
+    	}
+    	.navbar-brand{
+    		background-color: #03a9f4; 
+    	}
+    	.nr{
+    		background-color: #03a9f4; 
+    	}
+    </style>
+
+</head>
+
+<body ng-app="myApp" ng-controller="myController">
+    <!-- 响应头 -->
+    <div class="header">
+        <nav class="navbar navbar-default">
+            <!-- 响应式按钮 -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#myCollapse" ng-click="collapse()">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+                <a class="navbar-brand" href="#">今日头条</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myCollapse">
+                <ul class="nav navbar-nav">
+                    <li ng-repeat="(key, value) in type">
+                        <a href="#{{key}}" data-toggle="tab" ng-click="getData($event,key)">{{value}}</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <div class="tab-content">
+        <div class="tab-pane fade" id={{type}} ng-repeat="type in types">
+            <!-- 内容 -->
+            <div class="ct_data list-group " id="text4" class="layui-btn">
+                <a ng-href="{{data.url}}" class="list-group-item" ng-repeat="data in current" id="text4">
+                    <content class="ct" title={{data.title}} author={{data.author_name}} date={{data.date}} img={{data.thumbnail_pic_s}}>
+                    </content>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- 加载更多 -->
+    <button class="btn btn-primary btn-block" ng-click="loadmore()" ng-show="isShow()">
+		<span>加载更多</span>
+	</button>
+
+    <!-- 加载动画 -->
+    <div ng-include="templates/demo_animate.html"></div>
+
+</body>
+
+</html>

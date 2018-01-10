@@ -1,0 +1,47 @@
+* {
+    margin: 0px 0px;
+    padding: 0px 0px;
+}
+
+ul {
+    list-style: none;
+}
+
+
+/*内容*/
+
+.ct {}
+
+.ct:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.ct img {
+    float: right;
+    height: 100px;
+    width: auto;
+    vertical-align: middle;
+}
+
+
+/*头部*/
+
+.header {
+    border-bottom: 1px solid black;
+}
+
+.navbar {
+    position: fixed;
+    width: 100%;
+    z-index: 1;
+}
+
+.ct_data {
+    margin-top: 52px;
+}
+
+.list-group {
+    margin-bottom: 10px;
+}
